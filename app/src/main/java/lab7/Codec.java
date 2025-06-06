@@ -1,5 +1,6 @@
 // Robert Serban
-// Handles encoding and decoding tasks
+
+// Handles encoding string to bitstring, and decoding bitstring back to a string
 
 package lab7;
 

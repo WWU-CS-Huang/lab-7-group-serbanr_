@@ -1,5 +1,8 @@
 // Robert Serban
+
+
 // Handles huffman tree and huffman node properties and methods
+// Chose to use a java priority queue instead of heap for huffman handling
 
 package lab7;
 
@@ -10,6 +13,7 @@ public class HuffmanTree
     private Node root;
 
 
+    // create node properties for huffman tree
     public static class Node implements Comparable<Node>
     {
         char character;
@@ -46,14 +50,17 @@ public class HuffmanTree
         }
     }
 
+    // Huffman tree construction using java priority queue
     public HuffmanTree(Map<Character, Integer> freqMap)
     {
+        // initialize priority queue of node objects
         PriorityQueue<Node> queue = new PriorityQueue<>();
         for (var entry : freqMap.entrySet())
         {
             queue.add(new Node(entry.getKey(), entry.getValue()));
         }
 
+        // actually build the tree
         while (queue.size() > 1)
         {
             Node left = queue.poll();
@@ -62,14 +69,17 @@ public class HuffmanTree
             queue.add(merge);
         }
 
+        // set last node as root
         root = queue.poll();
     }
 
+    // Self explanatory :)
     public Node getRoot()
     {
         return root;
     }
 
+    // Main call method for building the char to binary value map 
     public Map<Character, String> buildEncodeMap()
     {
         Map<Character, String> map = new HashMap<>();
@@ -77,6 +87,7 @@ public class HuffmanTree
         return map;
     }
 
+    // recursive helper method for building the char to binary value map
     private void buildMap(Node node, String path, Map<Character, String> map)
     {
         if (node == null)
